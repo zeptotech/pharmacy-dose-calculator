@@ -31,13 +31,13 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 0 0 60px;
+    padding: 0 0 72px;
   }
 
   header {
     background: var(--result-bg);
     color: var(--result-text);
-    padding: 38px 32px 32px;
+    padding: 36px 32px 30px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -78,36 +78,31 @@
     background: #fff8e6;
     border-left: 4px solid #e6a817;
     margin: 28px auto 0;
-    max-width: 760px;
-    padding: 12px 18px;
-    font-size: 0.78rem;
+    max-width: 680px;
+    padding: 11px 16px;
+    font-size: 0.77rem;
     color: #7a5c10;
     border-radius: 0 6px 6px 0;
   }
 
   .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    max-width: 900px;
-    margin: 36px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-width: 680px;
+    margin: 32px auto 0;
     padding: 0 20px;
-  }
-
-  @media (max-width: 640px) {
-    .cards-wrapper { grid-template-columns: 1fr; }
   }
 
   .card {
     background: var(--panel);
-    border-radius: 18px;
+    border-radius: 20px;
     box-shadow: var(--shadow);
     overflow: hidden;
   }
 
   .card-header {
-    padding: 22px 26px 18px;
-    position: relative;
+    padding: 22px 28px 18px;
   }
   .card.amox .card-header { background: var(--amox-light); border-bottom: 2px solid var(--amox-mid); }
   .card.ceph .card-header { background: var(--ceph-light); border-bottom: 2px solid var(--ceph-mid); }
@@ -115,19 +110,19 @@
   .drug-badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     font-weight: 500;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     padding: 3px 10px;
     border-radius: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
   }
   .card.amox .drug-badge { background: var(--amox-accent); color: white; }
   .card.ceph .drug-badge { background: var(--ceph-accent); color: white; }
 
   .card-header h2 {
-    font-size: 1.18rem;
+    font-size: 1.22rem;
     font-weight: 700;
     letter-spacing: -0.3px;
   }
@@ -135,38 +130,69 @@
   .card.ceph .card-header h2 { color: var(--ceph-accent); }
 
   .card-header .subtitle {
-    font-size: 0.78rem;
+    font-size: 0.77rem;
     color: var(--muted);
-    margin-top: 3px;
+    margin-top: 2px;
     font-family: 'DM Mono', monospace;
   }
 
-  .card-body { padding: 24px 26px; }
-
-  .field-group {
-    margin-bottom: 18px;
+  /* two-column inner layout */
+  .card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
   }
-  label {
-    display: block;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+
+  .calc-section {
+    padding: 24px 26px 28px;
+  }
+  .calc-section + .calc-section {
+    border-left: 2px dashed var(--border);
+  }
+
+  .section-title {
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 6px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .field-group { margin-bottom: 14px; }
+
+  label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
   }
 
   .input-row {
     display: flex;
-    gap: 8px;
+    gap: 7px;
     align-items: center;
   }
 
   input[type="number"] {
     flex: 1;
-    padding: 10px 14px;
+    min-width: 0;
+    padding: 9px 11px;
     font-family: 'DM Mono', monospace;
-    font-size: 1rem;
+    font-size: 0.96rem;
     border: 1.5px solid var(--border);
     border-radius: 9px;
     background: #fafaf8;
@@ -174,6 +200,7 @@
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
     -moz-appearance: textfield;
+    width: 100%;
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -188,33 +215,34 @@
     flex-shrink: 0;
   }
   .unit-toggle button {
-    padding: 9px 14px;
+    padding: 8px 11px;
     font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     font-weight: 500;
     border: none;
     cursor: pointer;
     background: #fafaf8;
     color: var(--muted);
     transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
   }
   .unit-toggle button:not(:last-child) { border-right: 1.5px solid var(--border); }
-
   .card.amox .unit-toggle button.active { background: var(--amox-accent); color: white; }
   .card.ceph .unit-toggle button.active { background: var(--ceph-accent); color: white; }
 
-  .concentration-info {
-    font-size: 0.74rem;
+  .hint {
+    font-size: 0.68rem;
     color: var(--muted);
     font-family: 'DM Mono', monospace;
-    margin-top: 5px;
+    margin-top: 4px;
+    line-height: 1.45;
   }
 
   .calc-btn {
     width: 100%;
-    padding: 13px;
+    padding: 11px;
     font-family: 'Sora', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.86rem;
     font-weight: 600;
     border: none;
     border-radius: 10px;
@@ -223,82 +251,113 @@
     letter-spacing: 0.2px;
     transition: transform 0.12s, opacity 0.15s, box-shadow 0.15s;
   }
-  .calc-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
+  .calc-btn:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
   .calc-btn:active { transform: translateY(0); }
   .card.amox .calc-btn { background: var(--amox-accent); color: white; }
   .card.ceph .calc-btn { background: var(--ceph-accent); color: white; }
 
+  .calc-btn.outline {
+    background: transparent;
+    border: 2px solid;
+  }
+  .card.amox .calc-btn.outline { color: var(--amox-accent); border-color: var(--amox-accent); }
+  .card.ceph .calc-btn.outline { color: var(--ceph-accent); border-color: var(--ceph-accent); }
+  .card.amox .calc-btn.outline:hover { background: var(--amox-light); }
+  .card.ceph .calc-btn.outline:hover { background: var(--ceph-light); }
+
   .result-box {
-    margin-top: 18px;
-    border-radius: 12px;
-    padding: 16px 18px;
+    margin-top: 14px;
+    border-radius: 11px;
+    padding: 13px 15px;
     display: none;
-    animation: fadeSlide 0.3s ease;
+    animation: fadeSlide 0.28s ease;
   }
   .result-box.show { display: block; }
+
   .card.amox .result-box { background: var(--amox-light); border: 1.5px solid var(--amox-mid); }
   .card.ceph .result-box { background: var(--ceph-light); border: 1.5px solid var(--ceph-mid); }
-
-  .result-box.error-box {
-    background: #fdecea;
-    border-color: #f5b7b1;
-  }
+  .result-box.error-box { background: #fdecea !important; border-color: #f5b7b1 !important; }
 
   .result-label {
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     font-family: 'DM Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     color: var(--muted);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .result-value {
     font-family: 'DM Mono', monospace;
-    font-size: 1.45rem;
+    font-size: 1.28rem;
     font-weight: 500;
+    line-height: 1.2;
   }
   .card.amox .result-value { color: var(--amox-accent); }
   .card.ceph .result-value { color: var(--ceph-accent); }
-  .result-box.error-box .result-value { color: var(--error); font-size: 0.85rem; }
+  .result-box.error-box .result-value { color: var(--error) !important; font-size: 0.82rem; }
 
   .result-breakdown {
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-top: 9px;
+    padding-top: 9px;
     border-top: 1px solid var(--border);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--muted);
     font-family: 'DM Mono', monospace;
-    line-height: 1.7;
+    line-height: 1.75;
   }
+
+  /* reverse result table rows */
+  .rev-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+  .rev-row:last-of-type { border-bottom: none; }
+  .rev-row-label {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  .rev-row-value {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+  .card.amox .rev-row-value { color: var(--amox-accent); }
+  .card.ceph .rev-row-value { color: var(--ceph-accent); }
 
   .range-indicator {
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     padding: 2px 8px;
     border-radius: 20px;
-    margin-top: 6px;
+    margin-top: 5px;
     font-family: 'DM Mono', monospace;
     font-weight: 500;
   }
-  .range-ok { background: #d4edda; color: #1a6b2e; }
-  .range-low { background: #fff3cd; color: #856404; }
+  .range-ok   { background: #d4edda; color: #1a6b2e; }
+  .range-low  { background: #fff3cd; color: #856404; }
   .range-high { background: #f8d7da; color: #721c24; }
 
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 14px 0;
+  @media (max-width: 540px) {
+    .card-body { grid-template-columns: 1fr; }
+    .calc-section + .calc-section { border-left: none; border-top: 2px dashed var(--border); }
   }
 
   @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(7px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   footer {
     text-align: center;
-    margin-top: 48px;
-    font-size: 0.72rem;
+    margin-top: 52px;
+    font-size: 0.7rem;
     color: #a0a0b0;
     font-family: 'DM Mono', monospace;
   }
@@ -311,7 +370,7 @@
   <p>Liquid Suspension · mg/kg/day Reference</p>
 </header>
 
-<div style="max-width:760px;margin:0 auto;padding:0 20px;">
+<div style="max-width:680px;margin:0 auto;padding:0 20px;">
   <div class="disclaimer">
     ⚠️ <strong>For reference only.</strong> Always verify calculations independently. Consult current clinical guidelines and prescriber judgment for all dosing decisions.
   </div>
@@ -319,111 +378,203 @@
 
 <div class="cards-wrapper">
 
-  <!-- AMOXICILLIN -->
+  <!-- ══════════════════ AMOXICILLIN ══════════════════ -->
   <div class="card amox">
     <div class="card-header">
-      <div class="drug-badge">Antibiotic</div>
+      <div class="drug-badge">Antibiotic · First-Line</div>
       <h2>Amoxicillin</h2>
       <div class="subtitle">Oral Liquid Suspension</div>
     </div>
+
     <div class="card-body">
+      <!-- LEFT: Forward -->
+      <div class="calc-section">
+        <div class="section-title">Dose → mg/kg/day</div>
 
-      <div class="field-group">
-        <label>Patient Weight (kg)</label>
-        <input type="number" id="amox-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
-      </div>
+        <div class="field-group">
+          <label>Patient Weight</label>
+          <div class="input-row">
+            <input type="number" id="amox-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="amox-fwd-wt-kg" onclick="setWtUnit('amox','fwd','kg')">kg</button>
+              <button id="amox-fwd-wt-lb" onclick="setWtUnit('amox','fwd','lb')">lb</button>
+            </div>
+          </div>
+          <div class="hint" id="amox-wt-hint"></div>
+        </div>
 
-      <div class="field-group">
-        <label>Dose Administered</label>
-        <div class="input-row">
-          <input type="number" id="amox-dose" placeholder="e.g. 5" min="0" step="0.1">
-          <div class="unit-toggle">
-            <button class="active" id="amox-unit-ml" onclick="setUnit('amox','mL')">mL</button>
-            <button id="amox-unit-mg" onclick="setUnit('amox','mg')">mg</button>
+        <div class="field-group">
+          <label>Dose Given</label>
+          <div class="input-row">
+            <input type="number" id="amox-dose" placeholder="e.g. 5" min="0" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="amox-unit-ml" onclick="setUnit('amox','mL')">mL</button>
+              <button id="amox-unit-mg" onclick="setUnit('amox','mg')">mg</button>
+            </div>
           </div>
         </div>
-        <div class="concentration-info" id="amox-conc-info">Concentration: 250 mg/5 mL (50 mg/mL)</div>
-      </div>
 
-      <div class="field-group">
-        <label>Concentration (mg/mL)</label>
-        <div class="input-row">
-          <input type="number" id="amox-conc" value="50" min="1" step="0.1" placeholder="50">
+        <div class="field-group">
+          <label>Concentration (mg/mL)</label>
+          <input type="number" id="amox-conc" value="50" min="1" step="0.1">
+          <div class="hint" id="amox-conc-info">250 mg/5 mL = 50 mg/mL</div>
+          <div class="hint">125/5mL=25 · 250/5mL=50 · 400/5mL=80</div>
         </div>
-        <div class="concentration-info">Common: 125 mg/5mL=25 mg/mL · 250 mg/5mL=50 mg/mL · 400 mg/5mL=80 mg/mL</div>
-      </div>
 
-      <div class="field-group">
-        <label>Doses per Day</label>
-        <div class="unit-toggle" style="display:inline-flex;">
-          <button class="active" id="amox-freq-2" onclick="setFreq('amox',2)">BID</button>
-          <button id="amox-freq-3" onclick="setFreq('amox',3)">TID</button>
-          <button id="amox-freq-1" onclick="setFreq('amox',1)">QD</button>
+        <div class="field-group">
+          <label>Frequency</label>
+          <div class="unit-toggle">
+            <button class="active" id="amox-freq-2" onclick="setFreq('amox',2)">BID</button>
+            <button id="amox-freq-3" onclick="setFreq('amox',3)">TID</button>
+            <button id="amox-freq-1" onclick="setFreq('amox',1)">QD</button>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcForward('amox')">Calculate mg/kg/day</button>
+
+        <div class="result-box" id="amox-fwd-result">
+          <div class="result-label">mg / kg / day</div>
+          <div class="result-value" id="amox-fwd-value"></div>
+          <div class="result-breakdown" id="amox-fwd-breakdown"></div>
         </div>
       </div>
 
-      <button class="calc-btn" onclick="calculate('amox')">Calculate mg/kg/day</button>
+      <!-- RIGHT: Reverse -->
+      <div class="calc-section">
+        <div class="section-title">mg/kg/day → Dose</div>
 
-      <div class="result-box" id="amox-result">
-        <div class="result-label">Result</div>
-        <div class="result-value" id="amox-result-value"></div>
-        <div class="result-breakdown" id="amox-breakdown"></div>
+        <div class="field-group">
+          <label>Patient Weight</label>
+          <div class="input-row">
+            <input type="number" id="amox-rev-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="amox-rev-wt-kg" onclick="setWtUnit('amox','rev','kg')">kg</button>
+              <button id="amox-rev-wt-lb" onclick="setWtUnit('amox','rev','lb')">lb</button>
+            </div>
+          </div>
+          <div class="hint" id="amox-rev-wt-hint"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Target (mg/kg/day)</label>
+          <input type="number" id="amox-rev-target" placeholder="e.g. 40" min="0" step="1">
+          <div class="hint">Typical range: 40–90 mg/kg/day</div>
+        </div>
+
+        <div class="field-group">
+          <label>Concentration (mg/mL)</label>
+          <input type="number" id="amox-rev-conc" value="50" min="1" step="0.1">
+          <div class="hint" id="amox-rev-conc-info">250 mg/5 mL = 50 mg/mL</div>
+        </div>
+
+        <button class="calc-btn outline" onclick="calcReverse('amox')">Calculate Dose</button>
+
+        <div class="result-box" id="amox-rev-result">
+          <div class="result-label">Per-dose · BID &amp; TID</div>
+          <div id="amox-rev-rows"></div>
+          <div class="result-breakdown" id="amox-rev-breakdown"></div>
+        </div>
       </div>
-
     </div>
   </div>
 
-  <!-- CEPHALEXIN -->
+  <!-- ══════════════════ CEPHALEXIN ══════════════════ -->
   <div class="card ceph">
     <div class="card-header">
-      <div class="drug-badge">Antibiotic</div>
+      <div class="drug-badge">Antibiotic · 1st-Gen Cephalosporin</div>
       <h2>Cephalexin</h2>
       <div class="subtitle">Oral Liquid Suspension</div>
     </div>
+
     <div class="card-body">
+      <!-- LEFT: Forward -->
+      <div class="calc-section">
+        <div class="section-title">Dose → mg/kg/day</div>
 
-      <div class="field-group">
-        <label>Patient Weight (kg)</label>
-        <input type="number" id="ceph-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
-      </div>
+        <div class="field-group">
+          <label>Patient Weight</label>
+          <div class="input-row">
+            <input type="number" id="ceph-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="ceph-fwd-wt-kg" onclick="setWtUnit('ceph','fwd','kg')">kg</button>
+              <button id="ceph-fwd-wt-lb" onclick="setWtUnit('ceph','fwd','lb')">lb</button>
+            </div>
+          </div>
+          <div class="hint" id="ceph-wt-hint"></div>
+        </div>
 
-      <div class="field-group">
-        <label>Dose Administered</label>
-        <div class="input-row">
-          <input type="number" id="ceph-dose" placeholder="e.g. 5" min="0" step="0.1">
-          <div class="unit-toggle">
-            <button class="active" id="ceph-unit-ml" onclick="setUnit('ceph','mL')">mL</button>
-            <button id="ceph-unit-mg" onclick="setUnit('ceph','mg')">mg</button>
+        <div class="field-group">
+          <label>Dose Given</label>
+          <div class="input-row">
+            <input type="number" id="ceph-dose" placeholder="e.g. 5" min="0" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="ceph-unit-ml" onclick="setUnit('ceph','mL')">mL</button>
+              <button id="ceph-unit-mg" onclick="setUnit('ceph','mg')">mg</button>
+            </div>
           </div>
         </div>
-        <div class="concentration-info" id="ceph-conc-info">Concentration: 250 mg/5 mL (50 mg/mL)</div>
-      </div>
 
-      <div class="field-group">
-        <label>Concentration (mg/mL)</label>
-        <div class="input-row">
-          <input type="number" id="ceph-conc" value="50" min="1" step="0.1" placeholder="50">
+        <div class="field-group">
+          <label>Concentration (mg/mL)</label>
+          <input type="number" id="ceph-conc" value="50" min="1" step="0.1">
+          <div class="hint" id="ceph-conc-info">250 mg/5 mL = 50 mg/mL</div>
+          <div class="hint">125/5mL=25 · 250/5mL=50</div>
         </div>
-        <div class="concentration-info">Common: 125 mg/5mL=25 mg/mL · 250 mg/5mL=50 mg/mL</div>
-      </div>
 
-      <div class="field-group">
-        <label>Doses per Day</label>
-        <div class="unit-toggle" style="display:inline-flex;">
-          <button class="active" id="ceph-freq-2" onclick="setFreq('ceph',2)">BID</button>
-          <button id="ceph-freq-3" onclick="setFreq('ceph',3)">TID</button>
-          <button id="ceph-freq-4" onclick="setFreq('ceph',4)">QID</button>
+        <div class="field-group">
+          <label>Frequency</label>
+          <div class="unit-toggle">
+            <button class="active" id="ceph-freq-2" onclick="setFreq('ceph',2)">BID</button>
+            <button id="ceph-freq-3" onclick="setFreq('ceph',3)">TID</button>
+            <button id="ceph-freq-4" onclick="setFreq('ceph',4)">QID</button>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcForward('ceph')">Calculate mg/kg/day</button>
+
+        <div class="result-box" id="ceph-fwd-result">
+          <div class="result-label">mg / kg / day</div>
+          <div class="result-value" id="ceph-fwd-value"></div>
+          <div class="result-breakdown" id="ceph-fwd-breakdown"></div>
         </div>
       </div>
 
-      <button class="calc-btn" onclick="calculate('ceph')">Calculate mg/kg/day</button>
+      <!-- RIGHT: Reverse -->
+      <div class="calc-section">
+        <div class="section-title">mg/kg/day → Dose</div>
 
-      <div class="result-box" id="ceph-result">
-        <div class="result-label">Result</div>
-        <div class="result-value" id="ceph-result-value"></div>
-        <div class="result-breakdown" id="ceph-breakdown"></div>
+        <div class="field-group">
+          <label>Patient Weight</label>
+          <div class="input-row">
+            <input type="number" id="ceph-rev-weight" placeholder="e.g. 12.5" min="0.1" step="0.1">
+            <div class="unit-toggle">
+              <button class="active" id="ceph-rev-wt-kg" onclick="setWtUnit('ceph','rev','kg')">kg</button>
+              <button id="ceph-rev-wt-lb" onclick="setWtUnit('ceph','rev','lb')">lb</button>
+            </div>
+          </div>
+          <div class="hint" id="ceph-rev-wt-hint"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Target (mg/kg/day)</label>
+          <input type="number" id="ceph-rev-target" placeholder="e.g. 50" min="0" step="1">
+          <div class="hint">Typical range: 25–100 mg/kg/day</div>
+        </div>
+
+        <div class="field-group">
+          <label>Concentration (mg/mL)</label>
+          <input type="number" id="ceph-rev-conc" value="50" min="1" step="0.1">
+          <div class="hint" id="ceph-rev-conc-info">250 mg/5 mL = 50 mg/mL</div>
+        </div>
+
+        <button class="calc-btn outline" onclick="calcReverse('ceph')">Calculate Dose</button>
+
+        <div class="result-box" id="ceph-rev-result">
+          <div class="result-label">Per-dose · BID, TID &amp; QID</div>
+          <div id="ceph-rev-rows"></div>
+          <div class="result-breakdown" id="ceph-rev-breakdown"></div>
+        </div>
       </div>
-
     </div>
   </div>
 
@@ -435,128 +586,173 @@
 
 <script>
   const state = {
-    amox: { unit: 'mL', freq: 2 },
-    ceph: { unit: 'mL', freq: 2 }
+    amox: { unit: 'mL', freq: 2, wtUnit: 'kg', revWtUnit: 'kg' },
+    ceph: { unit: 'mL', freq: 2, wtUnit: 'kg', revWtUnit: 'kg' }
   };
 
-  // Typical ranges (mg/kg/day)
   const ranges = {
-    amox: { low: 20, high: 90 },   // standard 40-90 mg/kg/day, mild 20-40
-    ceph: { low: 25, high: 100 }   // 25-100 mg/kg/day
+    amox: { low: 20, high: 90 },
+    ceph: { low: 25, high: 100 }
   };
 
-  function setUnit(drug, unit) {
+  function setWtUnit(drug, side, unit) {
+    // side: 'fwd' or 'rev'
+    const key = side === 'fwd' ? 'wtUnit' : 'revWtUnit';
+    state[drug][key] = unit;
+    document.getElementById(`${drug}-${side}-wt-kg`).classList.toggle('active', unit === 'kg');
+    document.getElementById(`${drug}-${side}-wt-lb`).classList.toggle('active', unit === 'lb');
+    // update hint
+    const inputId = side === 'fwd' ? `${drug}-weight` : `${drug}-rev-weight`;
+    updateWtHint(drug, side, parseFloat(document.getElementById(inputId).value));
+  }
+
+  function updateWtHint(drug, side, val) {
+    const hintId = side === 'fwd' ? `${drug}-wt-hint` : `${drug}-rev-wt-hint`;
+    const key    = side === 'fwd' ? 'wtUnit' : 'revWtUnit';
+    const unit   = state[drug][key];
+    const el     = document.getElementById(hintId);
+    if (!el) return;
+    if (isNaN(val) || val <= 0) { el.textContent = ''; return; }
+    if (unit === 'lb') {
+      el.textContent = `= ${(val / 2.20462).toFixed(2)} kg`;
+    } else {
+      el.textContent = `= ${(val * 2.20462).toFixed(1)} lb`;
+    }
+  }
+
+  function getWeightKg(drug, side) {
+    const inputId = side === 'fwd' ? `${drug}-weight` : `${drug}-rev-weight`;
+    const key     = side === 'fwd' ? 'wtUnit' : 'revWtUnit';
+    const raw     = parseFloat(document.getElementById(inputId).value);
+    if (isNaN(raw) || raw <= 0) return NaN;
+    return state[drug][key] === 'lb' ? raw / 2.20462 : raw;
+  }
+
+
     state[drug].unit = unit;
-    const mlBtn = document.getElementById(`${drug}-unit-ml`);
-    const mgBtn = document.getElementById(`${drug}-unit-mg`);
-    mlBtn.classList.toggle('active', unit === 'mL');
-    mgBtn.classList.toggle('active', unit === 'mg');
-    updateConcInfo(drug);
+    document.getElementById(`${drug}-unit-ml`).classList.toggle('active', unit === 'mL');
+    document.getElementById(`${drug}-unit-mg`).classList.toggle('active', unit === 'mg');
   }
 
   function setFreq(drug, freq) {
     state[drug].freq = freq;
-    const freqOptions = drug === 'amox' ? [1,2,3] : [2,3,4];
-    freqOptions.forEach(f => {
+    [1, 2, 3, 4].forEach(f => {
       const btn = document.getElementById(`${drug}-freq-${f}`);
       if (btn) btn.classList.toggle('active', f === freq);
     });
   }
 
-  function updateConcInfo(drug) {
-    const concEl = document.getElementById(`${drug}-conc-info`);
-    const concVal = parseFloat(document.getElementById(`${drug}-conc`).value);
-    if (!isNaN(concVal)) {
-      const per5 = (concVal * 5).toFixed(0);
-      concEl.textContent = `Concentration: ${per5} mg/5 mL (${concVal} mg/mL)`;
-    }
+  function updateConcHint(hintId, val) {
+    const el = document.getElementById(hintId);
+    if (el && !isNaN(val) && val > 0)
+      el.textContent = `${(val * 5).toFixed(0)} mg/5 mL = ${val} mg/mL`;
   }
 
-  // Update concentration info on change
-  ['amox','ceph'].forEach(drug => {
-    document.getElementById(`${drug}-conc`).addEventListener('input', () => updateConcInfo(drug));
+  ['amox-conc', 'ceph-conc', 'amox-rev-conc', 'ceph-rev-conc'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function () {
+      updateConcHint(id + '-info', parseFloat(this.value));
+    });
   });
 
-  function calculate(drug) {
-    const weightInput = document.getElementById(`${drug}-weight`);
-    const doseInput = document.getElementById(`${drug}-dose`);
-    const concInput = document.getElementById(`${drug}-conc`);
-    const resultBox = document.getElementById(`${drug}-result`);
-    const resultValue = document.getElementById(`${drug}-result-value`);
-    const breakdown = document.getElementById(`${drug}-breakdown`);
+  // Live weight conversion hints
+  [['amox','fwd','amox-weight'], ['amox','rev','amox-rev-weight'],
+   ['ceph','fwd','ceph-weight'], ['ceph','rev','ceph-rev-weight']].forEach(([drug, side, inputId]) => {
+    document.getElementById(inputId).addEventListener('input', function () {
+      updateWtHint(drug, side, parseFloat(this.value));
+    });
+  });
 
-    const weight = parseFloat(weightInput.value);
-    const dose = parseFloat(doseInput.value);
-    const conc = parseFloat(concInput.value);
-    const { unit, freq } = state[drug];
-
-    // Validation
-    resultBox.classList.remove('error-box');
-    if (isNaN(weight) || weight <= 0) {
-      showError(drug, 'Please enter a valid patient weight.');
-      return;
-    }
-    if (isNaN(dose) || dose <= 0) {
-      showError(drug, 'Please enter a valid dose amount.');
-      return;
-    }
-    if (isNaN(conc) || conc <= 0) {
-      showError(drug, 'Please enter a valid concentration.');
-      return;
-    }
-
-    // Convert dose to mg
-    let doseMg;
-    if (unit === 'mL') {
-      doseMg = dose * conc;
-    } else {
-      doseMg = dose;
-    }
-
-    const mgPerDose = doseMg;
-    const mgPerDay = doseMg * freq;
-    const mgKgDay = mgPerDay / weight;
-    const mgKgDose = mgPerDose / weight;
-
-    // Range check
-    const range = ranges[drug];
-    let rangeLabel = '';
-    let rangeClass = '';
-    if (mgKgDay < range.low) {
-      rangeLabel = `Below typical range (${range.low}–${range.high} mg/kg/day)`;
-      rangeClass = 'range-low';
-    } else if (mgKgDay > range.high) {
-      rangeLabel = `Above typical range (${range.low}–${range.high} mg/kg/day)`;
-      rangeClass = 'range-high';
-    } else {
-      rangeLabel = `Within typical range (${range.low}–${range.high} mg/kg/day)`;
-      rangeClass = 'range-ok';
-    }
-
-    const freqLabel = { 1:'QD (once)', 2:'BID (twice)', 3:'TID (three times)', 4:'QID (four times)' }[freq] || `${freq}x/day`;
-    const doseDisplay = unit === 'mL' ? `${dose} mL → ${mgPerDose.toFixed(1)} mg` : `${dose} mg`;
-
-    resultValue.textContent = `${mgKgDay.toFixed(2)} mg/kg/day`;
-    breakdown.innerHTML = `
-      Dose given: ${doseDisplay}<br>
-      Per dose: ${mgKgDose.toFixed(2)} mg/kg<br>
-      Frequency: ${freqLabel}<br>
-      Weight: ${weight} kg · Conc: ${conc} mg/mL<br>
-      <span class="range-indicator ${rangeClass}">${rangeLabel}</span>
-    `;
-
-    resultBox.classList.add('show');
-    resultBox.style.display = 'block';
+  function rangeTag(drug, mgKgDay) {
+    const r = ranges[drug];
+    if (mgKgDay < r.low) return { label: `Below typical range (${r.low}–${r.high} mg/kg/day)`, cls: 'range-low' };
+    if (mgKgDay > r.high) return { label: `Above typical range (${r.low}–${r.high} mg/kg/day)`, cls: 'range-high' };
+    return { label: `Within typical range (${r.low}–${r.high} mg/kg/day)`, cls: 'range-ok' };
   }
 
-  function showError(drug, msg) {
-    const resultBox = document.getElementById(`${drug}-result`);
-    const resultValue = document.getElementById(`${drug}-result-value`);
-    const breakdown = document.getElementById(`${drug}-breakdown`);
-    resultBox.classList.add('show', 'error-box');
-    resultBox.style.display = 'block';
-    resultValue.textContent = msg;
-    breakdown.innerHTML = '';
+  /* ── forward ── */
+  function calcForward(drug) {
+    const weightKg = getWeightKg(drug, 'fwd');
+    const dose     = parseFloat(document.getElementById(`${drug}-dose`).value);
+    const conc     = parseFloat(document.getElementById(`${drug}-conc`).value);
+    const { unit, freq, wtUnit } = state[drug];
+    const box      = document.getElementById(`${drug}-fwd-result`);
+
+    box.classList.remove('error-box');
+    if (isNaN(weightKg) || weightKg <= 0) return showErr(box, `${drug}-fwd-value`, 'Enter a valid weight.');
+    if (isNaN(dose)     || dose     <= 0) return showErr(box, `${drug}-fwd-value`, 'Enter a valid dose.');
+    if (isNaN(conc)     || conc     <= 0) return showErr(box, `${drug}-fwd-value`, 'Enter a valid concentration.');
+
+    const doseMg   = unit === 'mL' ? dose * conc : dose;
+    const mgKgDay  = (doseMg * freq) / weightKg;
+    const mgKgDose = doseMg / weightKg;
+    const { label, cls } = rangeTag(drug, mgKgDay);
+    const freqLabel = { 1:'QD', 2:'BID', 3:'TID', 4:'QID' }[freq];
+    const doseDisp  = unit === 'mL' ? `${dose} mL → ${doseMg.toFixed(1)} mg` : `${dose} mg`;
+    const rawWt     = parseFloat(document.getElementById(`${drug}-weight`).value);
+    const wtDisp    = wtUnit === 'lb' ? `${rawWt} lb (${weightKg.toFixed(2)} kg)` : `${weightKg.toFixed(2)} kg`;
+
+    document.getElementById(`${drug}-fwd-value`).textContent = `${mgKgDay.toFixed(2)} mg/kg/day`;
+    document.getElementById(`${drug}-fwd-breakdown`).innerHTML =
+      `Dose: ${doseDisp}<br>Per dose: ${mgKgDose.toFixed(2)} mg/kg · ${freqLabel} · ${wtDisp}<br>
+       <span class="range-indicator ${cls}">${label}</span>`;
+    box.classList.add('show');
+    box.style.display = 'block';
+  }
+
+  /* ── reverse ── */
+  function calcReverse(drug) {
+    const weightKg = getWeightKg(drug, 'rev');
+    const target   = parseFloat(document.getElementById(`${drug}-rev-target`).value);
+    const conc     = parseFloat(document.getElementById(`${drug}-rev-conc`).value);
+    const box      = document.getElementById(`${drug}-rev-result`);
+
+    box.classList.remove('error-box');
+    if (isNaN(weightKg) || weightKg <= 0) return showRevErr(box, drug, 'Enter a valid weight.');
+    if (isNaN(target)   || target   <= 0) return showRevErr(box, drug, 'Enter a target mg/kg/day.');
+    if (isNaN(conc)     || conc     <= 0) return showRevErr(box, drug, 'Enter a valid concentration.');
+
+    const totalMgDay = target * weightKg;
+
+    const freqs = drug === 'ceph'
+      ? [{ label: 'BID', n: 2 }, { label: 'TID', n: 3 }, { label: 'QID', n: 4 }]
+      : [{ label: 'BID', n: 2 }, { label: 'TID', n: 3 }];
+
+    let rowsHTML = '';
+    freqs.forEach(({ label, n }) => {
+      const mgPerDose = totalMgDay / n;
+      const mLPerDose = mgPerDose / conc;
+      rowsHTML += `
+        <div class="rev-row">
+          <span class="rev-row-label">${label} (${n}×/day)</span>
+          <span class="rev-row-value">${mLPerDose.toFixed(2)} mL &nbsp;/&nbsp; ${mgPerDose.toFixed(1)} mg</span>
+        </div>`;
+    });
+
+    const rawWt  = parseFloat(document.getElementById(`${drug}-rev-weight`).value);
+    const wtDisp = state[drug].revWtUnit === 'lb' ? `${rawWt} lb (${weightKg.toFixed(2)} kg)` : `${weightKg.toFixed(2)} kg`;
+    const { label: rLabel, cls: rCls } = rangeTag(drug, target);
+    document.getElementById(`${drug}-rev-rows`).innerHTML = rowsHTML;
+    document.getElementById(`${drug}-rev-breakdown`).innerHTML =
+      `Total/day: ${totalMgDay.toFixed(1)} mg · Conc: ${conc} mg/mL · Wt: ${wtDisp}<br>
+       <span class="range-indicator ${rCls}">${rLabel}</span>`;
+    box.classList.add('show');
+    box.style.display = 'block';
+  }
+
+  function showErr(box, valueId, msg) {
+    box.classList.add('show', 'error-box');
+    box.style.display = 'block';
+    document.getElementById(valueId).textContent = msg;
+    const bd = box.querySelector('.result-breakdown');
+    if (bd) bd.innerHTML = '';
+  }
+
+  function showRevErr(box, drug, msg) {
+    box.classList.add('show', 'error-box');
+    box.style.display = 'block';
+    document.getElementById(`${drug}-rev-rows`).innerHTML =
+      `<div style="font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--error);padding:4px 0">${msg}</div>`;
+    document.getElementById(`${drug}-rev-breakdown`).innerHTML = '';
   }
 </script>
 </body>
